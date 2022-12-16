@@ -13,6 +13,8 @@ class Api::V1::SensorsController < ApplicationController
   end
 
   def read
+    @all_data = Accele.all
+    render json: @all_data
   end
 
   def update
