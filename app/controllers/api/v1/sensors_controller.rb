@@ -1,8 +1,15 @@
 class Api::V1::SensorsController < ApplicationController
   protect_from_forgery with: :null_session
-
+  
   def create
-    puts params_check
+  incoming = Accele.create!(params_check)
+  # puts params_check
+  if incoming
+    render json: incoming
+  else 
+    render json: incoming.errors
+  end
+    
   end
 
   def read

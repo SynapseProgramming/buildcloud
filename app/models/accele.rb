@@ -6,5 +6,5 @@ class Accele < ApplicationRecord
       validates :Y, presence: true
       validates :Z, presence: true
       validates :Time, presence: true
-      validates :Sent, presence: true
+      validates :Sent, inclusion: {in: [true, false]}
 end
