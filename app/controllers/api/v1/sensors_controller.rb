@@ -5,9 +5,9 @@ class Api::V1::SensorsController < ApplicationController
   incoming = Accele.create!(params_check)
   # puts params_check
   if incoming
-    render json: incoming
+    render json: true
   else 
-    render json: incoming.errors
+    render json: false
   end
     
   end
@@ -24,6 +24,6 @@ class Api::V1::SensorsController < ApplicationController
   end
 
   def params_check
-    params.require(:sensor).permit(:Nodeid, :Battery, :X, :Y, :Z, :Time, :Sent)
+  params.require(:sensor).permit(:Nodeid, :Battery, :X, :Y, :Z, :Time, :Sent)
   end
 end
