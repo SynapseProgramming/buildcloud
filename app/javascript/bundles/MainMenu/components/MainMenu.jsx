@@ -16,7 +16,7 @@ const data = {
 
 name: "test1",
 columns: ["time","value"],
-points: [[12345,1],[33333,3]]
+points: [[12,1],[13,3]]
 
 };
 
