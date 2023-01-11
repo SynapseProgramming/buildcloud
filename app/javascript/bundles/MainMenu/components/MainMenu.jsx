@@ -33,12 +33,8 @@ const series1 = new TimeSeries(data);
 
 const MainMenu = (props) => {
   const [name, setName] = useState(props.name);
-
-  const [mainX, setmainX] = useState(new TimeSeries(data));
-
+  const [mainX, setmainX] = useState();
   const [isLoading, setLoading] = useState(true);
-
-  // const [incomingData, setin]
 
   useEffect(() => {
     const url = "api/v1/sensors/read";
@@ -52,35 +48,24 @@ const MainMenu = (props) => {
           throw new Error("Network response was not ok.");
         })
         .then((response) => {
-          console.log("ran here!");
-          // print out incoming data
-          //TODO: create a new series for each x,y,z value
           response.forEach((element) => {
-            // console.log("X value" + element.X);
-            // console.log("Y value" + element.Y);
             seriesX["points"].push([element.Time, element.X]);
           });
-          // console.log(seriesX);
-          if (isLoading) {
 
-          console.log(seriesX);
+          if (isLoading) {
+            console.log(seriesX);
             setmainX(new TimeSeries(seriesX));
 
-          console.log("running");
+            console.log("running");
             setLoading(false);
           }
-          // MAIN = new TimeSeries(seriesX);
         })
         .catch(() => console.log("something went wrong!"));
     }
     return () => {
-      // setmainX(new TimeSeries(data));
-
-      console.log("finished");
-
       is_mounted = false;
     };
-  },[]);
+  }, []);
 
   if (isLoading) {
     return <p>Loading!</p>;
@@ -88,12 +73,6 @@ const MainMenu = (props) => {
 
   return (
     <div>
-      {/* <h3>this is a test</h3>
-      <p>
-      <a href="#" class="btn btn-primary my-1">Main call to action</a>
-      <a href="#" class="btn btn-secondary my-1">Secondary action</a>
-    </p> */}
-
       <ChartContainer timeRange={mainX.timerange()} width={800}>
         <ChartRow height="200">
           <YAxis
