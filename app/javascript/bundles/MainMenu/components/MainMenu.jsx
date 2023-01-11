@@ -49,7 +49,11 @@ const MainMenu = (props) => {
         })
         .then((response) => {
           response.forEach((element) => {
-            seriesX["points"].push([element.Time, element.X]);
+            let timeConvert = new Date(0);
+            timeConvert.setUTCSeconds(element.Time);
+            let test = timeConvert.getTime();
+            console.log(timeConvert);
+            seriesX["points"].push([test, element.X]);
           });
 
           if (isLoading) {
@@ -77,7 +81,7 @@ const MainMenu = (props) => {
         <ChartRow height="200">
           <YAxis
             id="axis1"
-            label="AUD"
+            label="X"
             min={-1}
             max={7}
             width="60"
@@ -85,7 +89,7 @@ const MainMenu = (props) => {
             format=",.2f"
           />
           <Charts>
-            <LineChart axis="axis1" series={mainX} column={["aud"]} />
+            <LineChart axis="axis1" series={mainX} column={["X"]} />
           </Charts>
         </ChartRow>
       </ChartContainer>
