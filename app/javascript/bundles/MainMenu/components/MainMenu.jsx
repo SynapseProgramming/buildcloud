@@ -20,11 +20,16 @@ const sampleSeries = {
 };
 
 let seriesX = JSON.parse(JSON.stringify(sampleSeries));
+seriesX["name"] = "X";
+
+let seriesY = JSON.parse(JSON.stringify(sampleSeries));
+seriesY["name"] = "Y";
 
 
 const MainMenu = (props) => {
   const [name, setName] = useState(props.name);
   const [mainX, setmainX] = useState();
+  const [mainY, setmainY] = useState();
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -46,11 +51,14 @@ const MainMenu = (props) => {
             let test = timeConvert.getTime();
             console.log(timeConvert);
             seriesX["points"].push([test, element.X]);
+            seriesY["points"].push([test, element.Y]);
           });
 
           if (isLoading) {
-            console.log(seriesX);
+            // console.log(seriesX);
+            console.log(seriesY);
             setmainX(new TimeSeries(seriesX));
+            setmainY(new TimeSeries(seriesY));
 
             console.log("running");
             setLoading(false);
@@ -74,14 +82,29 @@ const MainMenu = (props) => {
           <YAxis
             id="axis1"
             label="X"
-            min={-1}
-            max={7}
+            min={-20}
+            max={20}
             width="60"
             type="linear"
             format=",.2f"
           />
           <Charts>
             <LineChart axis="axis1" series={mainX} column={["X"]} />
+          </Charts>
+        </ChartRow>
+
+        <ChartRow height="200">
+          <YAxis
+            id="axis1"
+            label="Y"
+            min={-20}
+            max={20}
+            width="60"
+            type="linear"
+            format=",.2f"
+          />
+          <Charts>
+            <LineChart axis="axis1" series={mainY} column={["Y"]} />
           </Charts>
         </ChartRow>
       </ChartContainer>
