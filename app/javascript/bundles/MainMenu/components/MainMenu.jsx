@@ -12,7 +12,6 @@ import {
   LineChart,
 } from "react-timeseries-charts";
 
-
 const sampleSeries = {
   name: "test1",
   columns: ["time", "value"],
@@ -25,11 +24,15 @@ seriesX["name"] = "X";
 let seriesY = JSON.parse(JSON.stringify(sampleSeries));
 seriesY["name"] = "Y";
 
+let seriesZ = JSON.parse(JSON.stringify(sampleSeries));
+seriesZ["name"] = "Z";
 
 const MainMenu = (props) => {
   const [name, setName] = useState(props.name);
   const [mainX, setmainX] = useState();
   const [mainY, setmainY] = useState();
+  const [mainZ, setmainZ] = useState();
+
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -52,15 +55,17 @@ const MainMenu = (props) => {
             console.log(timeConvert);
             seriesX["points"].push([test, element.X]);
             seriesY["points"].push([test, element.Y]);
+            seriesZ["points"].push([test, element.Z]);
           });
 
           if (isLoading) {
             // console.log(seriesX);
-            console.log(seriesY);
+            // console.log(seriesZ);
             setmainX(new TimeSeries(seriesX));
             setmainY(new TimeSeries(seriesY));
+            setmainZ(new TimeSeries(seriesZ));
 
-            console.log("running");
+            // console.log("running");
             setLoading(false);
           }
         })
@@ -77,8 +82,8 @@ const MainMenu = (props) => {
 
   return (
     <div>
-      <ChartContainer timeRange={mainX.timerange()} width={800}>
-        <ChartRow height="200">
+      <ChartContainer timeRange={mainX.timerange()} width={1000}>
+        <ChartRow height="150">
           <YAxis
             id="axis1"
             label="X"
@@ -93,9 +98,9 @@ const MainMenu = (props) => {
           </Charts>
         </ChartRow>
 
-        <ChartRow height="200">
+        <ChartRow height="150">
           <YAxis
-            id="axis1"
+            id="axis2"
             label="Y"
             min={-20}
             max={20}
@@ -104,7 +109,22 @@ const MainMenu = (props) => {
             format=",.2f"
           />
           <Charts>
-            <LineChart axis="axis1" series={mainY} column={["Y"]} />
+            <LineChart axis="axis2" series={mainY} column={["Y"]} />
+          </Charts>
+        </ChartRow>
+
+        <ChartRow height="150">
+          <YAxis
+            id="axis3"
+            label="Z"
+            min={-20}
+            max={20}
+            width="60"
+            type="linear"
+            format=",.2f"
+          />
+          <Charts>
+            <LineChart axis="axis3" series={mainZ} column={["Z"]} />
           </Charts>
         </ChartRow>
       </ChartContainer>
