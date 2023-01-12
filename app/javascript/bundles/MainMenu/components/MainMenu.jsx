@@ -12,14 +12,6 @@ import {
   LineChart,
 } from "react-timeseries-charts";
 
-const data = {
-  name: "test1",
-  columns: ["time", "value"],
-  points: [
-    [12, 1],
-    [13, 3],
-  ],
-};
 
 const sampleSeries = {
   name: "test1",
@@ -29,7 +21,6 @@ const sampleSeries = {
 
 let seriesX = JSON.parse(JSON.stringify(sampleSeries));
 
-const series1 = new TimeSeries(data);
 
 const MainMenu = (props) => {
   const [name, setName] = useState(props.name);
@@ -51,6 +42,7 @@ const MainMenu = (props) => {
           response.forEach((element) => {
             let timeConvert = new Date(0);
             timeConvert.setUTCSeconds(element.Time);
+            // TODO: refactor this line of code
             let test = timeConvert.getTime();
             console.log(timeConvert);
             seriesX["points"].push([test, element.X]);
