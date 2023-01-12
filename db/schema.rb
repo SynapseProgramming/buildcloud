@@ -10,8 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_16_074511) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "acceles", force: :cascade do |t|
+    t.integer "Nodeid", null: false
+    t.integer "Battery", null: false
+    t.integer "X", null: false
+    t.integer "Y", null: false
+    t.integer "Z", null: false
+    t.decimal "Time", null: false
+    t.boolean "Sent", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

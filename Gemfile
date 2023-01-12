@@ -67,3 +67,5 @@ group :test do
 end
 gem "mini_racer", platforms: :ruby
 gem "mini_racer", platforms: :ruby
+
+gem "bootstrap", "~> 5.2"

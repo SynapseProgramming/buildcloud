@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Nodeid: 1
+  Battery: 1
+  X: 1
+  'Y': 1
+  Z: 1
+  Time: 9.99
+  Sent: false
+
+two:
+  Nodeid: 1
+  Battery: 1
+  X: 1
+  'Y': 1
+  Z: 1
+  Time: 9.99
+  Sent: false
